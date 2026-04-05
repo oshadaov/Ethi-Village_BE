@@ -16,6 +16,8 @@ public class Guide {
     @Column(length = 3000)
     private String descp;
 
+    @Column(unique = true)
+    private String imageKey;
     // keep field name same as frontend expects
     private String img;
 
@@ -71,4 +73,12 @@ public class Guide {
     public void setImagePublicId(String imagePublicId) {
         this.imagePublicId = imagePublicId;
     }
+    public String getImageKey() {
+        return imageKey;
+    }
+
+    public void setImageKey(String imageKey) {
+        this.imageKey = imageKey;
+    }
+
 }

@@ -5,6 +5,7 @@ public class GuideRequest {
     private String name;
     private String role;
     private String descp;
+    private String imageKey;
 
     public GuideRequest() {
     }
@@ -32,4 +33,12 @@ public class GuideRequest {
     public void setDescp(String descp) {
         this.descp = descp;
     }
+    public String getImageKey() {
+        return imageKey;
+    }
+
+    public void setImageKey(String imageKey) {
+        this.imageKey = imageKey;
+    }
+
 }
