@@ -17,7 +17,9 @@ public class CorsConfig {
                         .allowedOrigins(
                                 "http://localhost:5173",
                                 "https://ethi-village-git-dev-oshadaovs-projects.vercel.app",
-                                "https://ethi-village-cg96llz6h-oshadaovs-projects.vercel.app"
+                                "https://ethi-village-cg96llz6h-oshadaovs-projects.vercel.app",
+                                "https://ethi-village-mu.vercel.app"
+
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
