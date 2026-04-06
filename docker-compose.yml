@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    container_name: ethi_village_backend
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    env_file:
+      - .env

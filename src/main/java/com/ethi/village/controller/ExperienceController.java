@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/experiences")
+@CrossOrigin(origins = "https://ethi-village-git-dev-oshadaovs-projects.vercel.app")
 public class ExperienceController {
 
     private final ExperienceService service;
