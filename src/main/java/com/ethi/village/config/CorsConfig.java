@@ -16,8 +16,8 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:5173",
-                                "https://ethi-village-git-dev-oshadaovs-projects.vercel.app",
-                                "https://ethi-village-cg96llz6h-oshadaovs-projects.vercel.app",
+                                "https://ethi-village.vercel.app",
+                                "https://www.ethivillage.com",
                                 "https://ethi-village-mu.vercel.app"
 
                         )
