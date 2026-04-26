@@ -15,6 +15,8 @@ public class Room {
     private String type;
     private String guests;
     private String priceText;
+    private Integer pricePerNight;
+    private Integer minNights;
 
     @Column(unique = true)
     private String imageKey;
@@ -42,6 +44,22 @@ public class Room {
     )
     @Column(name = "highlight")
     private List<String> highlights;
+
+    @ElementCollection
+    @CollectionTable(
+            name = "room_meals_included",
+            joinColumns = @JoinColumn(name = "room_id")
+    )
+    @Column(name = "meal")
+    private List<String> mealsIncluded;
+
+    @ElementCollection
+    @CollectionTable(
+            name = "room_staff_services",
+            joinColumns = @JoinColumn(name = "room_id")
+    )
+    @Column(name = "service")
+    private List<String> staffServices;
 
     public Room() {
     }
@@ -133,4 +151,16 @@ public class Room {
     public void setHighlights(List<String> highlights) {
         this.highlights = highlights;
     }
+
+    public Integer getPricePerNight() { return pricePerNight; }
+    public void setPricePerNight(Integer pricePerNight) { this.pricePerNight = pricePerNight; }
+
+    public Integer getMinNights() { return minNights; }
+    public void setMinNights(Integer minNights) { this.minNights = minNights; }
+
+    public List<String> getMealsIncluded() { return mealsIncluded; }
+    public void setMealsIncluded(List<String> mealsIncluded) { this.mealsIncluded = mealsIncluded; }
+
+    public List<String> getStaffServices() { return staffServices; }
+    public void setStaffServices(List<String> staffServices) { this.staffServices = staffServices; }
 }

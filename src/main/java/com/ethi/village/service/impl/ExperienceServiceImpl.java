@@ -31,7 +31,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 
         if (image != null && !image.isEmpty()) {
             Map upload = cloudinaryService.upload(image);
-            exp.setImageUrl((String) upload.get("secure_url"));
+            exp.setImage((String) upload.get("secure_url"));
             exp.setImagePublicId((String) upload.get("public_id"));
         }
 
@@ -55,7 +55,7 @@ public class ExperienceServiceImpl implements ExperienceService {
             }
 
             Map upload = cloudinaryService.upload(image);
-            exp.setImageUrl((String) upload.get("secure_url"));
+            exp.setImage((String) upload.get("secure_url"));
             exp.setImagePublicId((String) upload.get("public_id"));
         }
 
@@ -97,6 +97,7 @@ public class ExperienceServiceImpl implements ExperienceService {
         exp.setDifficulty(request.getDifficulty());
         exp.setPriceText(request.getPriceText());
         exp.setShortDescription(request.getShortDescription());
+        exp.setDescription(request.getDescription());
         exp.setHighlights(request.getHighlights());
         exp.setIncludes(request.getIncludes());
         exp.setBestFor(request.getBestFor());

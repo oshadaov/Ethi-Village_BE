@@ -24,11 +24,14 @@ public class Experience {
     private String difficulty;
     private String priceText;
 
-    private String imageUrl;
+    private String image;
     private String imagePublicId;
 
     @Column(length = 3000)
     private String shortDescription;
+
+    @Column(length = 5000)
+    private String description;
 
     @ElementCollection
     @CollectionTable(
@@ -129,12 +132,12 @@ public class Experience {
         this.priceText = priceText;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getImagePublicId() {
@@ -151,6 +154,14 @@ public class Experience {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<String> getHighlights() {
@@ -175,5 +186,9 @@ public class Experience {
 
     public void setBestFor(List<String> bestFor) {
         this.bestFor = bestFor;
+    }
+
+    public String getImageUrl() {
+    return image;
     }
 }

@@ -13,6 +13,7 @@ public class ExperienceRequest {
     private String difficulty;
     private String priceText;
     private String shortDescription;
+    private String description;
     private List<String> highlights;
     private List<String> includes;
     private List<String> bestFor;
@@ -46,6 +47,9 @@ public class ExperienceRequest {
 
     public String getShortDescription() { return shortDescription; }
     public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     public List<String> getHighlights() { return highlights; }
     public void setHighlights(List<String> highlights) { this.highlights = highlights; }

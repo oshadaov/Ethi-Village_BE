@@ -8,10 +8,14 @@ public class RoomRequest {
     private String type;
     private String guests;
     private String priceText;
+    private Integer pricePerNight;
+    private Integer minNights;
     private String imageKey;
     private String description;
     private List<String> amenities;
     private List<String> highlights;
+    private List<String> mealsIncluded;
+    private List<String> staffServices;
 
     public RoomRequest() {
     }
@@ -79,4 +83,16 @@ public class RoomRequest {
     public void setHighlights(List<String> highlights) {
         this.highlights = highlights;
     }
+
+    public Integer getPricePerNight() { return pricePerNight; }
+    public void setPricePerNight(Integer pricePerNight) { this.pricePerNight = pricePerNight; }
+
+    public Integer getMinNights() { return minNights; }
+    public void setMinNights(Integer minNights) { this.minNights = minNights; }
+
+    public List<String> getMealsIncluded() { return mealsIncluded; }
+    public void setMealsIncluded(List<String> mealsIncluded) { this.mealsIncluded = mealsIncluded; }
+
+    public List<String> getStaffServices() { return staffServices; }
+    public void setStaffServices(List<String> staffServices) { this.staffServices = staffServices; }
 }
