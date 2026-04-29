@@ -18,7 +18,7 @@ public class CorsConfig {
                                 "http://localhost:5173",
                                 "https://ethi-village.vercel.app",
                                 "https://www.ethivillage.com",
-                                "https://ethi-village-mu.vercel.app"
+                                "https://ethi-village.vercel.app"
 
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")

@@ -6,6 +6,7 @@ import com.ethi.village.repository.BlogPostRepository;
 import com.ethi.village.service.BlogPostService;
 import com.ethi.village.service.CloudinaryService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     @Override
+    @Transactional
     public BlogPost create(BlogPostRequest request, MultipartFile image) throws IOException {
         BlogPost post = new BlogPost();
         post.setTitle(request.getTitle());
@@ -45,8 +47,10 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     @Override
+    @Transactional
     public BlogPost update(Long id, BlogPostRequest request, MultipartFile image) throws IOException {
-        BlogPost post = getById(id);
+        BlogPost post = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Blog post not found"));
 
         post.setTitle(request.getTitle());
         post.setSlug(request.getSlug());
@@ -68,23 +72,30 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<BlogPost> getAll() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BlogPost getById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Blog post not found"));
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Blog post not found"));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BlogPost getBySlug(String slug) {
-        return repository.findBySlug(slug).orElseThrow(() -> new RuntimeException("Blog post not found"));
+        return repository.findBySlug(slug)
+                .orElseThrow(() -> new RuntimeException("Blog post not found"));
     }
 
     @Override
+    @Transactional
     public void delete(Long id) throws IOException {
-        BlogPost post = getById(id);
+        BlogPost post = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Blog post not found"));
         if (post.getImagePublicId() != null) {
             cloudinaryService.deleteImage(post.getImagePublicId());
         }

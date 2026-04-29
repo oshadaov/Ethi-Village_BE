@@ -4,6 +4,8 @@ import com.ethi.village.dto.response.ExperienceResponse;
 import com.ethi.village.entity.Experience;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class ExperienceMapper {
 
@@ -21,9 +23,13 @@ public class ExperienceMapper {
         response.setImageUrl(entity.getImageUrl());
         response.setImagePublicId(entity.getImagePublicId());
         response.setShortDescription(entity.getShortDescription());
-        response.setHighlights(entity.getHighlights());
-        response.setIncludes(entity.getIncludes());
-        response.setBestFor(entity.getBestFor());
+
+        // Wrap in new ArrayList to force Hibernate to load the collection
+        // while the session is still open, instead of copying the lazy proxy
+        response.setHighlights(entity.getHighlights() != null ? new ArrayList<>(entity.getHighlights()) : new ArrayList<>());
+        response.setIncludes(entity.getIncludes()   != null ? new ArrayList<>(entity.getIncludes())   : new ArrayList<>());
+        response.setBestFor(entity.getBestFor()     != null ? new ArrayList<>(entity.getBestFor())     : new ArrayList<>());
+
         return response;
     }
 }

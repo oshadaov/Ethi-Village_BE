@@ -1,7 +1,7 @@
 package com.ethi.village.controller;
 
 import com.ethi.village.dto.request.RoomRequest;
-import com.ethi.village.entity.Room;
+import com.ethi.village.dto.response.RoomResponse;
 import com.ethi.village.service.RoomService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
@@ -23,7 +23,7 @@ public class RoomController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Room create(
+    public RoomResponse create(
             @RequestPart("data") String data,
             @RequestPart(value = "image", required = false) MultipartFile image
     ) throws IOException {
@@ -32,7 +32,7 @@ public class RoomController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Room update(
+    public RoomResponse update(
             @PathVariable Long id,
             @RequestPart("data") String data,
             @RequestPart(value = "image", required = false) MultipartFile image
@@ -42,12 +42,12 @@ public class RoomController {
     }
 
     @GetMapping
-    public List<Room> getAll() {
+    public List<RoomResponse> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public Room getById(@PathVariable Long id) {
+    public RoomResponse getById(@PathVariable Long id) {
         return service.getById(id);
     }
 

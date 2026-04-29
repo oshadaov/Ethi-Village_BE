@@ -5,6 +5,7 @@ import com.ethi.village.entity.ContactInquiry;
 import com.ethi.village.repository.ContactInquiryRepository;
 import com.ethi.village.service.ContactInquiryService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class ContactInquiryServiceImpl implements ContactInquiryService {
     }
 
     @Override
+    @Transactional
     public ContactInquiry save(ContactInquiryRequest request) {
         ContactInquiry inquiry = new ContactInquiry();
         inquiry.setFullName(request.getFullName());
@@ -30,11 +32,11 @@ public class ContactInquiryServiceImpl implements ContactInquiryService {
         inquiry.setAccommodation(request.getAccommodation());
         inquiry.setPickup(request.getPickup());
         inquiry.setMessage(request.getMessage());
-        
         return repository.save(inquiry);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ContactInquiry> getAll() {
         return repository.findAllByOrderBySubmittedAtDesc();
     }

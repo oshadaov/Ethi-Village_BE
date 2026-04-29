@@ -1,7 +1,7 @@
 package com.ethi.village.controller;
 
 import com.ethi.village.dto.request.ExperienceRequest;
-import com.ethi.village.entity.Experience;
+import com.ethi.village.dto.response.ExperienceResponse;
 import com.ethi.village.service.ExperienceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
@@ -23,42 +23,35 @@ public class ExperienceController {
         this.service = service;
     }
 
-    // CREATE
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Experience create(
+    public ExperienceResponse create(
             @RequestPart("data") String data,
             @RequestPart(value = "image", required = false) MultipartFile image
     ) throws IOException {
-
         ExperienceRequest request = objectMapper.readValue(data, ExperienceRequest.class);
         return service.create(request, image);
     }
 
-    // UPDATE
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Experience update(
+    public ExperienceResponse update(
             @PathVariable Long id,
             @RequestPart("data") String data,
             @RequestPart(value = "image", required = false) MultipartFile image
     ) throws IOException {
-
         ExperienceRequest request = objectMapper.readValue(data, ExperienceRequest.class);
         return service.update(id, request, image);
     }
 
-    // GET ALL
     @GetMapping
-    public List<Experience> getAll() {
+    public List<ExperienceResponse> getAll() {
         return service.getAll();
     }
 
-    // GET ONE
     @GetMapping("/{id}")
-    public Experience getById(@PathVariable Long id) {
+    public ExperienceResponse getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
-    // DELETE
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) throws IOException {
         service.delete(id);

@@ -6,6 +6,7 @@ import com.ethi.village.repository.GalleryItemRepository;
 import com.ethi.village.service.CloudinaryService;
 import com.ethi.village.service.GalleryItemService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class GalleryItemServiceImpl implements GalleryItemService {
     }
 
     @Override
+    @Transactional
     public GalleryItem create(GalleryItemRequest request, MultipartFile image) throws IOException {
         GalleryItem item = new GalleryItem();
         applyData(item, request);
@@ -38,6 +40,7 @@ public class GalleryItemServiceImpl implements GalleryItemService {
     }
 
     @Override
+    @Transactional
     public GalleryItem update(Long id, GalleryItemRequest request, MultipartFile image) throws IOException {
         GalleryItem item = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Gallery item not found"));
@@ -48,7 +51,6 @@ public class GalleryItemServiceImpl implements GalleryItemService {
             if (item.getImagePublicId() != null) {
                 cloudinaryService.deleteImage(item.getImagePublicId());
             }
-
             Map upload = cloudinaryService.upload(image);
             item.setImage((String) upload.get("secure_url"));
             item.setImagePublicId((String) upload.get("public_id"));
@@ -58,17 +60,20 @@ public class GalleryItemServiceImpl implements GalleryItemService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public GalleryItem getById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Gallery item not found"));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<GalleryItem> getAll() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional
     public void delete(Long id) throws IOException {
         GalleryItem item = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Gallery item not found"));
