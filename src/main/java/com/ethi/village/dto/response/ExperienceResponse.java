@@ -15,9 +15,11 @@ public class ExperienceResponse {
     private String imageUrl;
     private String imagePublicId;
     private String shortDescription;
+    private String description;
     private List<String> highlights;
     private List<String> includes;
     private List<String> bestFor;
+    private List<String> galleryImages;
 
     public ExperienceResponse() {}
 
@@ -57,6 +59,9 @@ public class ExperienceResponse {
     public String getShortDescription() { return shortDescription; }
     public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
 
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
     public List<String> getHighlights() { return highlights; }
     public void setHighlights(List<String> highlights) { this.highlights = highlights; }
 
@@ -65,4 +70,7 @@ public class ExperienceResponse {
 
     public List<String> getBestFor() { return bestFor; }
     public void setBestFor(List<String> bestFor) { this.bestFor = bestFor; }
+
+    public List<String> getGalleryImages() { return galleryImages; }
+    public void setGalleryImages(List<String> galleryImages) { this.galleryImages = galleryImages; }
 }

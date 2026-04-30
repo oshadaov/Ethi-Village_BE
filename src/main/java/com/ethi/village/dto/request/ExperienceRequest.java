@@ -17,6 +17,7 @@ public class ExperienceRequest {
     private List<String> highlights;
     private List<String> includes;
     private List<String> bestFor;
+    private List<String> galleryImages;
 
     public ExperienceRequest() {
     }
@@ -59,4 +60,7 @@ public class ExperienceRequest {
 
     public List<String> getBestFor() { return bestFor; }
     public void setBestFor(List<String> bestFor) { this.bestFor = bestFor; }
+
+    public List<String> getGalleryImages() { return galleryImages; }
+    public void setGalleryImages(List<String> galleryImages) { this.galleryImages = galleryImages; }
 }

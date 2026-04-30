@@ -105,6 +105,7 @@ public class RoomServiceImpl implements RoomService {
         room.setHighlights(request.getHighlights());
         room.setMealsIncluded(request.getMealsIncluded());
         room.setStaffServices(request.getStaffServices());
+        room.setGalleryImages(request.getGalleryImages());
     }
 
     private RoomResponse toResponse(Room room) {
@@ -124,6 +125,7 @@ public class RoomServiceImpl implements RoomService {
         r.setHighlights(room.getHighlights()    != null ? new ArrayList<>(room.getHighlights())     : new ArrayList<>());
         r.setMealsIncluded(room.getMealsIncluded() != null ? new ArrayList<>(room.getMealsIncluded()) : new ArrayList<>());
         r.setStaffServices(room.getStaffServices() != null ? new ArrayList<>(room.getStaffServices()) : new ArrayList<>());
+        r.setGalleryImages(room.getGalleryImages() != null ? new ArrayList<>(room.getGalleryImages()) : new ArrayList<>());
         return r;
     }
 }

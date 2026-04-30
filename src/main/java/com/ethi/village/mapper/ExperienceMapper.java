@@ -23,12 +23,14 @@ public class ExperienceMapper {
         response.setImageUrl(entity.getImageUrl());
         response.setImagePublicId(entity.getImagePublicId());
         response.setShortDescription(entity.getShortDescription());
+        response.setDescription(entity.getDescription());
 
         // Wrap in new ArrayList to force Hibernate to load the collection
         // while the session is still open, instead of copying the lazy proxy
         response.setHighlights(entity.getHighlights() != null ? new ArrayList<>(entity.getHighlights()) : new ArrayList<>());
         response.setIncludes(entity.getIncludes()   != null ? new ArrayList<>(entity.getIncludes())   : new ArrayList<>());
         response.setBestFor(entity.getBestFor()     != null ? new ArrayList<>(entity.getBestFor())     : new ArrayList<>());
+        response.setGalleryImages(entity.getGalleryImages() != null ? new ArrayList<>(entity.getGalleryImages()) : new ArrayList<>());
 
         return response;
     }

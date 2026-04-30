@@ -19,6 +19,7 @@ public class RoomResponse {
     private List<String> highlights;
     private List<String> mealsIncluded;
     private List<String> staffServices;
+    private List<String> galleryImages;
 
     public RoomResponse() {}
 
@@ -66,4 +67,7 @@ public class RoomResponse {
 
     public List<String> getStaffServices() { return staffServices; }
     public void setStaffServices(List<String> staffServices) { this.staffServices = staffServices; }
+
+    public List<String> getGalleryImages() { return galleryImages; }
+    public void setGalleryImages(List<String> galleryImages) { this.galleryImages = galleryImages; }
 }

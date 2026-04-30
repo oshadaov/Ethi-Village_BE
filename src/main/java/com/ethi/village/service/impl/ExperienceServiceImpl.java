@@ -110,5 +110,6 @@ public class ExperienceServiceImpl implements ExperienceService {
         exp.setHighlights(request.getHighlights());
         exp.setIncludes(request.getIncludes());
         exp.setBestFor(request.getBestFor());
+        exp.setGalleryImages(request.getGalleryImages());
     }
 }

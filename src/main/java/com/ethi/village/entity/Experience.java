@@ -57,6 +57,14 @@ public class Experience {
     @Column(name = "best_for")
     private List<String> bestFor;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "experience_gallery_images",
+            joinColumns = @JoinColumn(name = "experience_id")
+    )
+    @Column(name = "image_url", length = 1000)
+    private List<String> galleryImages;
+
     public Experience() {
     }
 
@@ -186,6 +194,14 @@ public class Experience {
 
     public void setBestFor(List<String> bestFor) {
         this.bestFor = bestFor;
+    }
+
+    public List<String> getGalleryImages() {
+        return galleryImages;
+    }
+
+    public void setGalleryImages(List<String> galleryImages) {
+        this.galleryImages = galleryImages;
     }
 
     public String getImageUrl() {
