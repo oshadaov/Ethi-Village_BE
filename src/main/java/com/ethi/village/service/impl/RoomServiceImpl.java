@@ -29,7 +29,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional
-    public RoomResponse create(RoomRequest request, MultipartFile image) throws IOException {
+    public RoomResponse create(RoomRequest request, MultipartFile image, List<MultipartFile> galleryFiles) throws IOException {
         Room room = new Room();
         applyData(room, request);
 
@@ -39,12 +39,26 @@ public class RoomServiceImpl implements RoomService {
             room.setImagePublicId((String) upload.get("public_id"));
         }
 
+        if (galleryFiles != null && !galleryFiles.isEmpty()) {
+            List<String> urls = new java.util.ArrayList<>();
+            if (room.getGalleryImages() != null) {
+                urls.addAll(room.getGalleryImages());
+            }
+            for (MultipartFile file : galleryFiles) {
+                if (!file.isEmpty()) {
+                    Map upload = cloudinaryService.upload(file);
+                    urls.add((String) upload.get("secure_url"));
+                }
+            }
+            room.setGalleryImages(urls);
+        }
+
         return toResponse(repository.save(room));
     }
 
     @Override
     @Transactional
-    public RoomResponse update(Long id, RoomRequest request, MultipartFile image) throws IOException {
+    public RoomResponse update(Long id, RoomRequest request, MultipartFile image, List<MultipartFile> galleryFiles) throws IOException {
         Room room = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Room not found"));
 
@@ -57,6 +71,20 @@ public class RoomServiceImpl implements RoomService {
             Map upload = cloudinaryService.upload(image);
             room.setImage((String) upload.get("secure_url"));
             room.setImagePublicId((String) upload.get("public_id"));
+        }
+
+        if (galleryFiles != null && !galleryFiles.isEmpty()) {
+            List<String> urls = new java.util.ArrayList<>();
+            if (room.getGalleryImages() != null) {
+                urls.addAll(room.getGalleryImages());
+            }
+            for (MultipartFile file : galleryFiles) {
+                if (!file.isEmpty()) {
+                    Map upload = cloudinaryService.upload(file);
+                    urls.add((String) upload.get("secure_url"));
+                }
+            }
+            room.setGalleryImages(urls);
         }
 
         return toResponse(repository.save(room));
@@ -102,7 +130,6 @@ public class RoomServiceImpl implements RoomService {
         room.setImageKey(request.getImageKey());
         room.setDescription(request.getDescription());
         room.setAmenities(request.getAmenities());
-        room.setHighlights(request.getHighlights());
         room.setMealsIncluded(request.getMealsIncluded());
         room.setStaffServices(request.getStaffServices());
         room.setGalleryImages(request.getGalleryImages());
@@ -122,7 +149,6 @@ public class RoomServiceImpl implements RoomService {
         r.setImagePublicId(room.getImagePublicId());
         r.setDescription(room.getDescription());
         r.setAmenities(room.getAmenities()      != null ? new ArrayList<>(room.getAmenities())      : new ArrayList<>());
-        r.setHighlights(room.getHighlights()    != null ? new ArrayList<>(room.getHighlights())     : new ArrayList<>());
         r.setMealsIncluded(room.getMealsIncluded() != null ? new ArrayList<>(room.getMealsIncluded()) : new ArrayList<>());
         r.setStaffServices(room.getStaffServices() != null ? new ArrayList<>(room.getStaffServices()) : new ArrayList<>());
         r.setGalleryImages(room.getGalleryImages() != null ? new ArrayList<>(room.getGalleryImages()) : new ArrayList<>());

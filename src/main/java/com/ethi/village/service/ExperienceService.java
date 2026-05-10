@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ExperienceService {
 
-    ExperienceResponse create(ExperienceRequest request, MultipartFile image) throws IOException;
+    ExperienceResponse create(ExperienceRequest request, MultipartFile image, List<MultipartFile> galleryFiles) throws IOException;
 
-    ExperienceResponse update(Long id, ExperienceRequest request, MultipartFile image) throws IOException;
+    ExperienceResponse update(Long id, ExperienceRequest request, MultipartFile image, List<MultipartFile> galleryFiles) throws IOException;
 
     ExperienceResponse getById(Long id);
 

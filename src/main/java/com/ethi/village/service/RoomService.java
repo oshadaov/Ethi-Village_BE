@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface RoomService {
 
-    RoomResponse create(RoomRequest request, MultipartFile image) throws IOException;
+    RoomResponse create(RoomRequest request, MultipartFile image, List<MultipartFile> galleryFiles) throws IOException;
 
-    RoomResponse update(Long id, RoomRequest request, MultipartFile image) throws IOException;
+    RoomResponse update(Long id, RoomRequest request, MultipartFile image, List<MultipartFile> galleryFiles) throws IOException;
 
     RoomResponse getById(Long id);
 

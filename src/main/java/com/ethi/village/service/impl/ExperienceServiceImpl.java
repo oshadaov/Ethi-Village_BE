@@ -33,7 +33,7 @@ public class ExperienceServiceImpl implements ExperienceService {
 
     @Override
     @Transactional
-    public ExperienceResponse create(ExperienceRequest request, MultipartFile image) throws IOException {
+    public ExperienceResponse create(ExperienceRequest request, MultipartFile image, List<MultipartFile> galleryFiles) throws IOException {
         Experience exp = new Experience();
         applyData(exp, request);
 
@@ -43,12 +43,28 @@ public class ExperienceServiceImpl implements ExperienceService {
             exp.setImagePublicId((String) upload.get("public_id"));
         }
 
+
+
+        if (galleryFiles != null && !galleryFiles.isEmpty()) {
+            List<String> urls = new java.util.ArrayList<>();
+            if (exp.getGalleryImages() != null) {
+                urls.addAll(exp.getGalleryImages());
+            }
+            for (MultipartFile file : galleryFiles) {
+                if (!file.isEmpty()) {
+                    Map upload = cloudinaryService.upload(file);
+                    urls.add((String) upload.get("secure_url"));
+                }
+            }
+            exp.setGalleryImages(urls);
+        }
+
         return mapper.toResponse(repository.save(exp));
     }
 
     @Override
     @Transactional
-    public ExperienceResponse update(Long id, ExperienceRequest request, MultipartFile image) throws IOException {
+    public ExperienceResponse update(Long id, ExperienceRequest request, MultipartFile image, List<MultipartFile> galleryFiles) throws IOException {
         Experience exp = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Experience not found"));
 
@@ -61,6 +77,22 @@ public class ExperienceServiceImpl implements ExperienceService {
             Map upload = cloudinaryService.upload(image);
             exp.setImage((String) upload.get("secure_url"));
             exp.setImagePublicId((String) upload.get("public_id"));
+        }
+
+
+
+        if (galleryFiles != null && !galleryFiles.isEmpty()) {
+            List<String> urls = new java.util.ArrayList<>();
+            if (exp.getGalleryImages() != null) {
+                urls.addAll(exp.getGalleryImages());
+            }
+            for (MultipartFile file : galleryFiles) {
+                if (!file.isEmpty()) {
+                    Map upload = cloudinaryService.upload(file);
+                    urls.add((String) upload.get("secure_url"));
+                }
+            }
+            exp.setGalleryImages(urls);
         }
 
         return mapper.toResponse(repository.save(exp));

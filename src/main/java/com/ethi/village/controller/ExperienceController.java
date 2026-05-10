@@ -26,20 +26,22 @@ public class ExperienceController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ExperienceResponse create(
             @RequestPart("data") String data,
-            @RequestPart(value = "image", required = false) MultipartFile image
+            @RequestPart(value = "image", required = false) MultipartFile image,
+            @RequestPart(value = "galleryFiles", required = false) List<MultipartFile> galleryFiles
     ) throws IOException {
         ExperienceRequest request = objectMapper.readValue(data, ExperienceRequest.class);
-        return service.create(request, image);
+        return service.create(request, image, galleryFiles);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ExperienceResponse update(
             @PathVariable Long id,
             @RequestPart("data") String data,
-            @RequestPart(value = "image", required = false) MultipartFile image
+            @RequestPart(value = "image", required = false) MultipartFile image,
+            @RequestPart(value = "galleryFiles", required = false) List<MultipartFile> galleryFiles
     ) throws IOException {
         ExperienceRequest request = objectMapper.readValue(data, ExperienceRequest.class);
-        return service.update(id, request, image);
+        return service.update(id, request, image, galleryFiles);
     }
 
     @GetMapping

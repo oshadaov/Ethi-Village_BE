@@ -37,13 +37,6 @@ public class Room {
     @Column(name = "amenity")
     private List<String> amenities;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "room_highlights",
-            joinColumns = @JoinColumn(name = "room_id")
-    )
-    @Column(name = "highlight")
-    private List<String> highlights;
 
     @ElementCollection
     @CollectionTable(
@@ -152,13 +145,6 @@ public class Room {
         this.amenities = amenities;
     }
 
-    public List<String> getHighlights() {
-        return highlights;
-    }
-
-    public void setHighlights(List<String> highlights) {
-        this.highlights = highlights;
-    }
 
     public Integer getPricePerNight() { return pricePerNight; }
     public void setPricePerNight(Integer pricePerNight) { this.pricePerNight = pricePerNight; }
