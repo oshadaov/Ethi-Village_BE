@@ -99,4 +99,8 @@ public class RoomRequest {
 
     public List<String> getGalleryImages() { return galleryImages; }
     public void setGalleryImages(List<String> galleryImages) { this.galleryImages = galleryImages; }
+
+    private List<String> bookedDates;
+    public List<String> getBookedDates() { return bookedDates; }
+    public void setBookedDates(List<String> bookedDates) { this.bookedDates = bookedDates; }
 }

@@ -62,6 +62,14 @@ public class Room {
     @Column(name = "image_url", length = 1000)
     private List<String> galleryImages;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "room_booked_dates",
+            joinColumns = @JoinColumn(name = "room_id")
+    )
+    @Column(name = "booked_date")
+    private List<String> bookedDates;
+
     public Room() {
     }
 
@@ -160,4 +168,7 @@ public class Room {
 
     public List<String> getGalleryImages() { return galleryImages; }
     public void setGalleryImages(List<String> galleryImages) { this.galleryImages = galleryImages; }
+
+    public List<String> getBookedDates() { return bookedDates; }
+    public void setBookedDates(List<String> bookedDates) { this.bookedDates = bookedDates; }
 }
