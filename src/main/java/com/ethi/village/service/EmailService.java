@@ -17,20 +17,20 @@ public class EmailService {
     @org.springframework.beans.factory.annotation.Value("${spring.mail.username}")
     private String authenticatedEmail;
 
-    public void sendBookingEmail(String from, String to, String subject, String body) throws MessagingException {
+    public void sendBookingEmail(String guestEmail, String to, String subject, String body) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
         
-        try {
-            helper.setFrom(authenticatedEmail, "Guest: " + from); 
-        } catch (UnsupportedEncodingException e) {
-            helper.setFrom(authenticatedEmail);
-        }
+        // IMPORTANT: We use the authenticated email as the 'From' to satisfy SMTP servers,
+        // but we set the Display Name to the guest's email so the admin sees who it's from.
+        helper.setFrom(authenticatedEmail, "Guest: " + guestEmail);
         
-        helper.setReplyTo(from);
+        // This is the most important part: 'Reply-To' allows the admin to reply directly to the guest.
+        helper.setReplyTo(guestEmail);
+        
         helper.setTo(to);
         helper.setSubject(subject);
-        helper.setText(body);
+        helper.setText(body, true); // true for HTML
         
         mailSender.send(message);
     }
